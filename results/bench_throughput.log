@@ -1,0 +1,19 @@
+ML-KEM backend: kyber-py  size=10000000 B  reps=3  pings=50
+[tp] baseline               classical   206.67 MB/s (std 25.66)  echo RTT mean=0.23 ms p95=0.28 ms
+[tp] baseline               pqc         211.49 MB/s (std 5.27)  echo RTT mean=0.14 ms p95=0.19 ms
+[tp] baseline               hybrid      198.33 MB/s (std 26.90)  echo RTT mean=0.12 ms p95=0.15 ms
+[tp] proxy_0ms              classical   105.74 MB/s (std 9.41)  echo RTT mean=0.26 ms p95=0.32 ms
+[tp] proxy_0ms              pqc         105.50 MB/s (std 2.80)  echo RTT mean=0.30 ms p95=0.41 ms
+[tp] proxy_0ms              hybrid      104.71 MB/s (std 3.13)  echo RTT mean=0.26 ms p95=0.32 ms
+[tp] delay_50ms             classical    51.09 MB/s (std 5.07)  echo RTT mean=102.63 ms p95=103.16 ms
+[tp] delay_50ms             pqc          54.84 MB/s (std 1.95)  echo RTT mean=103.36 ms p95=103.52 ms
+[tp] delay_50ms             hybrid       61.61 MB/s (std 6.04)  echo RTT mean=102.34 ms p95=103.23 ms
+[tp] delay_100ms_loss_1pct  classical    13.78 MB/s (std 2.04)  echo RTT mean=207.22 ms p95=204.62 ms
+[tp] delay_100ms_loss_1pct  pqc          14.70 MB/s (std 0.53)  echo RTT mean=206.36 ms p95=203.35 ms
+[tp] delay_100ms_loss_1pct  hybrid       13.93 MB/s (std 2.12)  echo RTT mean=202.31 ms p95=203.11 ms
+[tp] loss_5pct              classical    14.11 MB/s (std 1.88)  echo RTT mean=12.46 ms p95=111.64 ms
+[tp] loss_5pct              pqc          11.59 MB/s (std 0.12)  echo RTT mean=25.05 ms p95=201.80 ms
+[tp] loss_5pct              hybrid       11.64 MB/s (std 0.09)  echo RTT mean=8.84 ms p95=1.84 ms
+wrote C:\Users\Admin\Documents\NS\pq-secure-channel\results\throughput_raw.csv (45 rows)
+wrote C:\Users\Admin\Documents\NS\pq-secure-channel\results\latency_raw.csv (750 rows)
+wrote C:\Users\Admin\Documents\NS\pq-secure-channel\results\throughput_summary.csv (15 rows)

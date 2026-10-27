@@ -1,0 +1,6 @@
+cryptography>=42
+kyber-py>=1.0
+pytest>=8
+matplotlib>=3.8
+# Optional native ML-KEM backend (needs liboqs + CMake; auto-detected if importable):
+# liboqs-python

@@ -1,0 +1,380 @@
+[
+  {
+    "nodeid": "tests/test_attacks.py::test_downgrade_without_policy_caught_by_signature",
+    "outcome": "passed",
+    "matrix": [
+      "T7",
+      "MITM strips hybrid/PQC from ClientHello; client has NO policy",
+      "Client aborts with SIG_INVALID (transcript signature mismatch)"
+    ],
+    "actual": "proxy: ClientHello rewritten: modes ['classical', 'pqc', 'hybrid'] -> ['classical'], ML-KEM key removed; client raised SignatureInvalid; client log=['SIG_INVALID']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_attacks.py::test_downgrade_with_policy_detected",
+    "outcome": "passed",
+    "matrix": [
+      "T8",
+      "MITM strips hybrid/PQC from ClientHello; client has min_mode=hybrid",
+      "Client aborts with DOWNGRADE_DETECTED"
+    ],
+    "actual": "proxy: ClientHello rewritten: modes ['classical', 'pqc', 'hybrid'] -> ['classical'], ML-KEM key removed; client raised DowngradeDetected; client log=['DOWNGRADE_DETECTED']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_attacks.py::test_proxy_without_attack_is_transparent",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_attacks.py::test_tampered_record_rejected_by_server",
+    "outcome": "passed",
+    "matrix": [
+      "T9",
+      "MITM flips a bit in an encrypted record (client->server)",
+      "Server logs BAD_TAG and closes the connection"
+    ],
+    "actual": "proxy: c2s: flipped 1 bit in ciphertext of record #1; server log=['HANDSHAKE_OK', 'BAD_TAG']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_attacks.py::test_replayed_record_rejected_by_server",
+    "outcome": "passed",
+    "matrix": [
+      "T10",
+      "MITM replays a captured record (client->server)",
+      "Server logs REPLAY_DETECTED and closes the connection"
+    ],
+    "actual": "proxy: c2s: record #1 delivered twice; server log=['HANDSHAKE_OK', 'REPLAY_DETECTED']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_attacks.py::test_dropped_record_gives_seq_gap",
+    "outcome": "passed",
+    "matrix": [
+      "T11",
+      "MITM drops a record (client->server)",
+      "Server logs SEQ_GAP and closes the connection"
+    ],
+    "actual": "proxy: c2s: record #1 dropped; server log=['HANDSHAKE_OK', 'SEQ_GAP']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_attacks.py::test_replayed_record_rejected_by_client",
+    "outcome": "passed",
+    "matrix": [
+      "T12",
+      "MITM replays a server->client record",
+      "Client raises ReplayDetected and logs REPLAY_DETECTED"
+    ],
+    "actual": "proxy: s2c: record #0 delivered twice; client log=['HANDSHAKE_OK', 'REPLAY_DETECTED']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_attacks.py::test_tampered_record_rejected_by_client",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_crypto_suite.py::test_mlkem_roundtrip_and_sizes",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_crypto_suite.py::test_mlkem_wrong_ciphertext_gives_different_secret",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_crypto_suite.py::test_x25519_agreement",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_crypto_suite.py::test_kdf_directional_and_transcript_bound",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_crypto_suite.py::test_aead_detects_modification",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_crypto_suite.py::test_ed25519_pinned_verify",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_each_mode_agrees_on_keys[classical]",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_each_mode_agrees_on_keys[pqc]",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_each_mode_agrees_on_keys[hybrid]",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_negotiates_strongest_mutual_mode",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_stripped_client_hello_caught_by_signature",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_policy_rejects_classical_only_server",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_unpinned_server_key_rejected",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_tampered_server_hello_rejected",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_bad_finished_rejected",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_garbage_client_hello_rejected",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_handshake.py::test_raw_sizes_are_tracked",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_logger.py::test_jsonl_fields_and_summary",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_logger.py::test_console_alert_is_coloured",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_normal_round_trip_each_mode[classical]",
+    "outcome": "passed",
+    "matrix": [
+      "T1",
+      "None (normal operation, one test per mode)",
+      "Handshake OK; data round trip identical"
+    ],
+    "actual": "mode=classical, 50 kB echo identical, 100 kB upload confirmed, backend=kyber-py, client log=['HANDSHAKE_OK']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_normal_round_trip_each_mode[pqc]",
+    "outcome": "passed",
+    "matrix": [
+      "T1",
+      "None (normal operation, one test per mode)",
+      "Handshake OK; data round trip identical"
+    ],
+    "actual": "mode=pqc, 50 kB echo identical, 100 kB upload confirmed, backend=kyber-py, client log=['HANDSHAKE_OK']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_normal_round_trip_each_mode[hybrid]",
+    "outcome": "passed",
+    "matrix": [
+      "T1",
+      "None (normal operation, one test per mode)",
+      "Handshake OK; data round trip identical"
+    ],
+    "actual": "mode=hybrid, 50 kB echo identical, 100 kB upload confirmed, backend=kyber-py, client log=['HANDSHAKE_OK']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_default_negotiation_picks_hybrid",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_policy_refuses_classical_only_server",
+    "outcome": "passed",
+    "matrix": [
+      "T6",
+      "Server only supports classical; client policy min_mode=hybrid",
+      "Client aborts with DOWNGRADE_DETECTED"
+    ],
+    "actual": "client raised DowngradeDetected; client log=['DOWNGRADE_DETECTED']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_same_server_accepted_without_policy",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_pqc_policy_accepts_hybrid_rejects_classical",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_unpinned_server_key_rejected",
+    "outcome": "passed",
+    "matrix": [
+      "T2",
+      "Server presents a signature from an unpinned (wrong/forged) key",
+      "Client aborts with SIG_INVALID"
+    ],
+    "actual": "client raised SignatureInvalid; client log=['SIG_INVALID']",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_server_logs_failure_when_client_aborts",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_normal_and_policy.py::test_no_common_mode_is_handshake_fail",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_in_order_delivery_and_frame_layout",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_bit_flip_in_ciphertext_is_bad_tag",
+    "outcome": "passed",
+    "matrix": [
+      "T3",
+      "Tampered ciphertext",
+      "Rejected: BAD_TAG, connection aborted"
+    ],
+    "actual": "record layer raised BadTag -> event BAD_TAG",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_bit_flip_in_tag_is_bad_tag",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_replayed_record_detected",
+    "outcome": "passed",
+    "matrix": [
+      "T4",
+      "Replay of a captured record",
+      "Rejected: REPLAY_DETECTED"
+    ],
+    "actual": "record layer raised ReplayDetected -> event REPLAY_DETECTED",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_immediate_duplicate_is_replay",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_gap_detected",
+    "outcome": "passed",
+    "matrix": [
+      "T5",
+      "Dropped / reordered record",
+      "Rejected: SEQ_GAP"
+    ],
+    "actual": "record layer raised SeqGap -> event SEQ_GAP",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_rewriting_seq_field_is_bad_tag_not_replay",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_wrong_direction_reflection_rejected",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  },
+  {
+    "nodeid": "tests/test_record_layer.py::test_oversize_and_truncated",
+    "outcome": "passed",
+    "matrix": null,
+    "actual": "",
+    "backend": "kyber-py"
+  }
+]

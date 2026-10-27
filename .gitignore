@@ -1,0 +1,12 @@
+# virtual environment and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# PRIVATE server key + generated pin file: never commit key material
+keys/
+
+# runtime logs (benchmark CSVs, plots and test_results.json ARE kept as evidence)
+results/*.jsonl
+results/bench.done

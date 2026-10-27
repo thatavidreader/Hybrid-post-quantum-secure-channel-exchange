@@ -1,0 +1,4 @@
+mode,backend,n_cpu_batch,cpu_ms_per_handshake,cpu_mcycles_per_handshake,peak_heap_kib_mean,peak_heap_kib_max,cpu_note
+classical,kyber-py,300,0.688,1.87,5.9,5.9,"CPU ms = wall ms of CPU-bound single-thread batch; Mcycles from QueryProcessCycleTime (client+server, one process)"
+pqc,kyber-py,300,24.161,65.01,248.0,249.9,"CPU ms = wall ms of CPU-bound single-thread batch; Mcycles from QueryProcessCycleTime (client+server, one process)"
+hybrid,kyber-py,300,21.958,60.11,248.6,249.7,"CPU ms = wall ms of CPU-bound single-thread batch; Mcycles from QueryProcessCycleTime (client+server, one process)"

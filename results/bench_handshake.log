@@ -1,0 +1,23 @@
+ML-KEM backend: kyber-py   runs=100 warmup=5
+[crypto-only] classical mean=0.92 ms  p95=1.23 ms  cpu=0.10 ms  peak=6 KiB
+[crypto-only] pqc       mean=27.09 ms  p95=32.10 ms  cpu=4.38 ms  peak=248 KiB
+[crypto-only] hybrid    mean=27.61 ms  p95=39.42 ms  cpu=5.05 ms  peak=249 KiB
+wrote C:\Users\Admin\Documents\NS\pq-secure-channel\results\handshake_crypto_raw.csv (300 rows)
+wrote C:\Users\Admin\Documents\NS\pq-secure-channel\results\handshake_resources.csv (3 rows)
+[e2e] baseline               classical mean=    2.08 ms  p95=    2.76 ms  p99=    3.35 ms
+[e2e] baseline               pqc       mean=   29.22 ms  p95=   43.68 ms  p99=   75.43 ms
+[e2e] baseline               hybrid    mean=   24.77 ms  p95=   39.85 ms  p99=   45.99 ms
+[e2e] proxy_0ms              classical mean=    2.93 ms  p95=    3.90 ms  p99=    4.36 ms
+[e2e] proxy_0ms              pqc       mean=   26.08 ms  p95=   32.54 ms  p99=   41.29 ms
+[e2e] proxy_0ms              hybrid    mean=   25.83 ms  p95=   34.60 ms  p99=   41.32 ms
+[e2e] delay_50ms             classical mean=  211.52 ms  p95=  221.12 ms  p99=  256.13 ms
+[e2e] delay_50ms             pqc       mean=  246.58 ms  p95=  269.60 ms  p99=  303.62 ms
+[e2e] delay_50ms             hybrid    mean=  310.60 ms  p95=  595.85 ms  p99= 1162.11 ms
+[e2e] delay_100ms_loss_1pct  classical mean=  418.29 ms  p95=  431.63 ms  p99=  608.93 ms
+[e2e] delay_100ms_loss_1pct  pqc       mean=  469.18 ms  p95=  639.69 ms  p99=  668.43 ms
+[e2e] delay_100ms_loss_1pct  hybrid    mean=  481.86 ms  p95=  658.35 ms  p99=  676.58 ms
+[e2e] loss_5pct              classical mean=   48.62 ms  p95=  206.85 ms  p99=  210.99 ms
+[e2e] loss_5pct              pqc       mean=   79.39 ms  p95=  243.39 ms  p99=  448.28 ms
+[e2e] loss_5pct              hybrid    mean=   93.12 ms  p95=  250.20 ms  p99=  431.30 ms
+wrote C:\Users\Admin\Documents\NS\pq-secure-channel\results\handshake_e2e_raw.csv (1500 rows)
+wrote C:\Users\Admin\Documents\NS\pq-secure-channel\results\handshake_summary.csv (18 rows)
