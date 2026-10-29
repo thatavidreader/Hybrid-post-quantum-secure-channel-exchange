@@ -10,9 +10,9 @@ IMPORTANT - what the pure-Python proxy does and does NOT model
 * LOSS is an **RTO-stall approximation, not real packet loss.** Bytes are never
   dropped (the kernel's TCP between proxy and endpoints is lossless). Instead each
   1460-byte segment-equivalent of a chunk is "lost" with probability p, and every
-  lost segment stalls delivery of that chunk - and, because TCP is in-order, of
-  everything behind it (head-of-line blocking) - by one retransmission timeout
-  (RTO = 200 ms, Linux's minimum). Stalls are computed from each chunk's READ time,
+  lost segment stalls delivery of that chunk by one retransmission timeout
+  (RTO = 200 ms, Linux's minimum), and because TCP is in-order it also stalls
+  everything behind it (head-of-line blocking). Stalls are computed from each chunk's READ time,
   so chunks that the proxy reads back-to-back have overlapping (not serially
   accumulating) stalls: a bulk transfer therefore pays roughly the largest stall,
   not the sum. (Measured: 10 MB at 5 % loss finished in ~0.9 s, whereas ~340
