@@ -12,9 +12,14 @@ IMPORTANT - what the pure-Python proxy does and does NOT model
   1460-byte segment-equivalent of a chunk is "lost" with probability p, and every
   lost segment stalls delivery of that chunk - and, because TCP is in-order, of
   everything behind it (head-of-line blocking) - by one retransmission timeout
-  (RTO = 200 ms, Linux's minimum). It ignores congestion-window collapse, fast
-  retransmit, SACK and repeated losses of the same segment, so it is a
-  qualitative model of loss cost, not a replacement for a real netem run.
+  (RTO = 200 ms, Linux's minimum). Stalls are computed from each chunk's READ time,
+  so chunks that the proxy reads back-to-back have overlapping (not serially
+  accumulating) stalls: a bulk transfer therefore pays roughly the largest stall,
+  not the sum. (Measured: 10 MB at 5 % loss finished in ~0.9 s, whereas ~340
+  serial 200 ms stalls would take ~68 s.) It also ignores congestion-window
+  collapse, fast retransmit, SACK and repeated losses of the same segment, so
+  it is a qualitative, probably optimistic model of loss cost for bulk data, not
+  a replacement for a real netem run.
 * No bandwidth limit and no queue limit (infinite pipe with latency).
 * Loss draws use a seeded RNG, so a given (seed, traffic pattern) is reproducible.
 

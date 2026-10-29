@@ -41,6 +41,15 @@ def main() -> None:
     for _, name, tid, attack, expected, actual, verdict in rows:
         esc = lambda s: s.replace("|", "\\|")
         lines.append(f"| {tid} | `{name}` | {esc(attack)} | {esc(expected)} | {esc(actual)} | **{verdict}** |")
+    # Full inventory: every test, grouped by file, so the 46/46 coverage claim is checkable.
+    by_file: dict[str, list[dict]] = {}
+    for r in results:
+        by_file.setdefault(r["nodeid"].split("::", 1)[0], []).append(r)
+    lines += ["", "## Full test inventory", "",
+              "| Test file | Tests | Passed | Test names |", "|---|---|---|---|"]
+    for path, rs in sorted(by_file.items()):
+        names = ", ".join(f"`{r['nodeid'].split('::', 1)[1]}`" for r in rs)
+        lines.append(f"| `{path}` | {len(rs)} | {sum(r['outcome'] == 'passed' for r in rs)} | {names} |")
     (ROOT / "docs" / "test_matrix.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print(f"wrote docs/test_matrix.md ({len(rows)} scenario rows, {passed}/{total} passed)")
 

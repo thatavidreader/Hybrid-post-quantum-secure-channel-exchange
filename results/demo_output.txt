@@ -1,0 +1,55 @@
+Server up on 127.0.0.1:57059; ML-KEM backend = kyber-py
+
+==============================================================================
+ 1. NORMAL SESSION (client requires >= hybrid)
+==============================================================================
+[SERVER info ] HANDSHAKE_OK peer=127.0.0.1:57060 mode=hybrid 
+[CLIENT info ] HANDSHAKE_OK peer=127.0.0.1:57059 mode=hybrid 
+negotiated mode=hybrid, handshake=34.4 ms, handshake wire bytes=3583, echo ok=True
+
+==============================================================================
+ 2a. DOWNGRADE ATTACK, client policy min_mode=hybrid  -> expect DOWNGRADE_DETECTED
+==============================================================================
+[CLIENT ALERT] DOWNGRADE_DETECTED peer=127.0.0.1:57061 server selected 'classical' but policy requires at least 'hybrid'
+attacker did: ClientHello rewritten: modes ['classical', 'pqc', 'hybrid'] -> ['classical'], ML-KEM key removed
+client aborted -> DowngradeDetected
+[SERVER info ] HANDSHAKE_FAIL peer=127.0.0.1:57063 connection error: peer closed connection
+
+==============================================================================
+ 2b. DOWNGRADE ATTACK, NO client policy  -> expect SIG_INVALID (signed transcript mismatch)
+==============================================================================
+[CLIENT ALERT] SIG_INVALID peer=127.0.0.1:57064 ServerHello signature does not verify under the pinned key over the transcript (wrong server key, or ClientHello/ServerHello altered in transit)
+attacker did: ClientHello rewritten: modes ['classical', 'pqc', 'hybrid'] -> ['classical'], ML-KEM key removed
+client aborted -> SignatureInvalid
+[SERVER info ] HANDSHAKE_FAIL peer=127.0.0.1:57066 connection error: peer closed connection
+
+==============================================================================
+ 3. TAMPERED CIPHERTEXT (bit flip in record #1)  -> expect BAD_TAG at server
+==============================================================================
+[CLIENT info ] HANDSHAKE_OK peer=127.0.0.1:57067 mode=hybrid 
+[SERVER info ] HANDSHAKE_OK peer=127.0.0.1:57069 mode=hybrid 
+[SERVER ALERT] BAD_TAG peer=127.0.0.1:57069 mode=hybrid GCM authentication failed (claimed seq=1)
+attacker did: c2s: flipped 1 bit in ciphertext of record #1
+
+==============================================================================
+ 4. REPLAYED RECORD (record #1 delivered twice)  -> expect REPLAY_DETECTED at server
+==============================================================================
+[SERVER info ] HANDSHAKE_OK peer=127.0.0.1:57072 mode=hybrid 
+[CLIENT info ] HANDSHAKE_OK peer=127.0.0.1:57070 mode=hybrid 
+attacker did: c2s: record #1 delivered twice
+[SERVER ALERT] REPLAY_DETECTED peer=127.0.0.1:57072 mode=hybrid authentic record seq=1 already consumed (expected 2)
+
+==============================================================================
+ 5. SECURITY LOG SUMMARY (log_summary)
+==============================================================================
+results\demo_server.log.jsonl:
+   BAD_TAG              1
+   HANDSHAKE_FAIL       2
+   HANDSHAKE_OK         3
+   REPLAY_DETECTED      1
+results\demo_client.log.jsonl:
+   DOWNGRADE_DETECTED   1
+   HANDSHAKE_OK         3
+   SIG_INVALID          1
+
+Demo complete. Raw logs: results\demo_server.log.jsonl, results\demo_client.log.jsonl

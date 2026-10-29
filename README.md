@@ -41,7 +41,7 @@ python -m bench.plot_results                            # PNG/SVG in results/plo
 ```
 
 ## Summary of results
-(Full tables, anomalies and limitations: [docs/results_interpretation.md](docs/results_interpretation.md). Backend: `kyber-py`; i7-6600U, Windows 11.)
+(Full tables, anomalies and limitations: [docs/results_interpretation.md](docs/results_interpretation.md); report chapter mapping and rubric checklist: [docs/report_mapping.md](docs/report_mapping.md). Backend: `kyber-py`; i7-6600U, Windows 11.)
 
 | Mode | Handshake bytes raw / wire | Crypto-only handshake (mean ± std) |
 |---|---|---|
@@ -55,4 +55,4 @@ python -m bench.plot_results                            # PNG/SVG in results/plo
 * The hybrid 50 ms cell contains slow bursts from host interference (p99 1162 ms); use its median (264 ms).
 
 ## Limitations
-Pure-Python ML-KEM; localhost lab with client, server and proxy in one process; **emulated loss is an RTO-stall approximation, not real packet loss**; JSON/base64 encoding inflates wire bytes; Ed25519 authentication is not post-quantum (ML-DSA is future scope); no rekeying; noisy, non-isolated benchmark machine.
+Pure-Python ML-KEM; localhost lab with client, server and proxy in one process; **emulated loss is an RTO-stall approximation, not real packet loss (stalls overlap, so bulk-transfer loss costs are optimistic)**; JSON/base64 encoding inflates wire bytes; Ed25519 authentication is not post-quantum (ML-DSA is future scope); no rekeying; noisy, non-isolated benchmark machine.
